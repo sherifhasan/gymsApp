@@ -62,7 +62,8 @@ fun DetailsScreen(gym: Gym) {
                     contentDescription = null,
                     modifier = Modifier
                         .weight(0.1f)
-                        .size(36.dp), colorFilter = ColorFilter.tint(color = Color.White)
+                        .size(36.dp),
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
                 )
             }
             Spacer(
