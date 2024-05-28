@@ -6,8 +6,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -37,11 +40,13 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun GymsApp() {
     val navController = rememberNavController()
+
     NavHost(navController = navController, startDestination = "gyms") {
         composable("gyms") {
             val vm: GymsViewModel = hiltViewModel()
+            val state by vm.state.collectAsStateWithLifecycle(lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current)
             GymScreen(
-                state = vm.state.value,
+                state = state,
                 onFavourite = { id, oldValue -> vm.toggleFavouriteState(id, oldValue) },
                 onItemClicked = { id -> navController.navigate("gyms/$id") })
 

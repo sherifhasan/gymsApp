@@ -1,8 +1,5 @@
 package com.example.gyms.presenation.details
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,6 +7,10 @@ import com.example.gyms.domain.models.Gym
 import com.example.gyms.domain.usecases.GetGymByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,7 +19,7 @@ class GymDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val getGymByIdUseCase: GetGymByIdUseCase
 ) : ViewModel() {
-    var state by mutableStateOf<Gym?>(null)
+    private val _state = MutableStateFlow<Gym?>(null)
     private val errorHandler =
         CoroutineExceptionHandler { _, throwable -> throwable.printStackTrace() }
 
@@ -27,9 +28,11 @@ class GymDetailsViewModel @Inject constructor(
         getGym(gymId)
     }
 
+    val state: StateFlow<Gym?> get() = _state.asStateFlow()
+
     private fun getGym(id: Int) {
         viewModelScope.launch(errorHandler) {
-            state = getGymByIdUseCase(id)
+            _state.update { getGymByIdUseCase(id) }
         }
     }
 }

@@ -22,14 +22,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.gyms.domain.models.Gym
 
 @Composable
 fun GymDetailsScreen() {
-
-    val vm: GymDetailsViewModel = viewModel()
-    val item = vm.state
+    val vm: GymDetailsViewModel = hiltViewModel()
+    val state =
+        vm.state.collectAsStateWithLifecycle(lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current)
+    val item = state.value
     item?.let {
         DetailsScreen(item)
     }
