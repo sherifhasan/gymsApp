@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,10 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.gyms.R
 import com.example.gyms.domain.models.Gym
+import com.example.gyms.ui.theme.LightBackground
 
 @Composable
 fun GymDetailsScreen() {
@@ -40,22 +42,25 @@ fun GymDetailsScreen() {
 @Composable
 fun DetailsScreen(gym: Gym) {
     Box(modifier = Modifier.fillMaxSize()) {
+        Image(
+            modifier = Modifier.fillMaxSize(),
+            painter = painterResource(id = R.drawable.gym), // Replace with your gym image resource
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+        )
         Column(
-            modifier = Modifier.padding(32.dp), horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier
+                .padding(32.dp)
+                .align(Alignment.BottomStart)
         ) {
-            Image(
-                modifier = Modifier.size(380.dp),
-                imageVector = Icons.Filled.Place,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-            )
             Row(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
                     text = gym.name,
-                    style = MaterialTheme.typography.headlineLarge,
+                    style = MaterialTheme.typography.headlineMedium.copy(color = LightBackground),
                     modifier = Modifier.weight(0.9f)
+
                 )
                 Image(
                     imageVector = if (gym.isFavourite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
@@ -66,21 +71,18 @@ fun DetailsScreen(gym: Gym) {
                     colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
                 )
             }
-            Spacer(
-                modifier = Modifier
-                    .size(36.dp)
-            )
+            Spacer(modifier = Modifier.size(16.dp))
+
             Text(
-                text = gym.place, style = MaterialTheme.typography.bodyLarge
+                text = gym.place,
+                style = MaterialTheme.typography.bodyLarge.copy(color = LightBackground)
             )
-            Spacer(
-                modifier = Modifier
-                    .size(36.dp)
-            )
+            Spacer(modifier = Modifier.size(8.dp))
+            val openStatusText = if (gym.isOpen) "Open" else "Closed"
+            val openStatusColor = if (gym.isOpen) Color.Green else Color.Red
             Text(
-                text = if (gym.isOpen) "Gym is opened" else "Gym is Closed",
-                style = MaterialTheme.typography.bodyLarge,
-                color = if (gym.isOpen) Color.Green else Color.Red
+                text = "Status: $openStatusText",
+                style = MaterialTheme.typography.headlineSmall.copy(color = openStatusColor)
             )
         }
     }
