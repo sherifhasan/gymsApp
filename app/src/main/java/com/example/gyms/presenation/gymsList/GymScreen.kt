@@ -15,9 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.example.gyms.domain.models.Gym
+import com.example.gyms.presenation.SemanticsDescription
 import com.example.gyms.ui.theme.GymAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,7 +61,11 @@ fun GymScreen(
                 if (state.isLoading) {
                     CircularProgressIndicator(
                         progress = 0.89f,
-                        modifier = Modifier.width(64.dp),
+                        modifier = Modifier
+                            .width(64.dp)
+                            .semantics {
+                                this.contentDescription = SemanticsDescription.GYM_SCREEN_LOADING
+                            },
                         color = MaterialTheme.colorScheme.secondary,
                         trackColor = MaterialTheme.colorScheme.surfaceVariant,
                     )

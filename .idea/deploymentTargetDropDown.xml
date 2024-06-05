@@ -5,19 +5,19 @@
       <entry key="BuildList">
         <State />
       </entry>
-      <entry key="MyImage">
+      <entry key="GymScreenTest">
         <State />
       </entry>
       <entry key="MyLayout">
-        <State />
-      </entry>
-      <entry key="MyTextField">
         <State />
       </entry>
       <entry key="ShowDetailsScreen">
         <State />
       </entry>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="loadingState_isActive()">
         <State />
       </entry>
     </value>
