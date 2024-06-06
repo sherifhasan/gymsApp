@@ -8,13 +8,13 @@
       <entry key="GymScreenTest">
         <State />
       </entry>
-      <entry key="MyLayout">
-        <State />
-      </entry>
       <entry key="ShowDetailsScreen">
         <State />
       </entry>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="loadedContentState_isActive()">
         <State />
       </entry>
       <entry key="loadingState_isActive()">
