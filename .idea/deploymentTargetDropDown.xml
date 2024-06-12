@@ -2,22 +2,22 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="BuildList">
-        <State />
-      </entry>
       <entry key="GymScreenTest">
-        <State />
-      </entry>
-      <entry key="ShowDetailsScreen">
         <State />
       </entry>
       <entry key="app">
         <State />
       </entry>
+      <entry key="errorState_isActive()">
+        <State />
+      </entry>
       <entry key="loadedContentState_isActive()">
         <State />
       </entry>
-      <entry key="loadingState_isActive()">
+      <entry key="onFavouriteItem_clicked()">
+        <State />
+      </entry>
+      <entry key="onItemClick_IdPassedCorrectly()">
         <State />
       </entry>
     </value>
