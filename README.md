@@ -23,7 +23,7 @@ GymsApp is an Android app that shows a list of gyms using Retrofit for network c
 ## Setup and Installation
 
  **Clone the repository**:
-    ```bash
+    ```
     git clone https://github.com/sherifhasan/gymsApp.git
     cd gymsApp
     ```
